@@ -68,7 +68,17 @@ class ExamplesController extends Controller
         if(!empty($request->getPost()))
         {
             $postParams = $request->getPost();
-            print_r($postParams);
+
+            $client = new Client($request->getPost());
+
+            $query = $db->prepare("UPDATE `client` SET `nom`=:nom, `prenom`=:prenom,  `email`=:email WHERE id=:id");
+
+            $query->bindValue(":id", $id);
+            $query->bindValue(":nom", $client->getNom());
+            $query->bindValue(":prenom", $client->getPrenom());
+            $query->bindValue(":email", $client->getEmail());
+
+            $query->execute();
         }
 
         $client = $db->query("SELECT * FROM `client` WHERE id = " . $id)->fetch($db::FETCH_ASSOC);

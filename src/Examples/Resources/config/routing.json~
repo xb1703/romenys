@@ -1,0 +1,43 @@
+{
+    "route": {
+        "homepage": {
+            "path": "/",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "homepage"
+        },
+        "form": {
+            "path": "/form",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "form"
+        },
+        "user_list": {
+            "path": "/users",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "list"
+        },
+        "user_new": {
+            "path": "/user/new",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "new"
+        },
+	"client_new": {
+            "path": "/client/new",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "new"
+        },
+        "user_show": {
+            "path": "/user/:id",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "show"
+        },
+        "default": {
+            "path": "/",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "default"
+        }
+    },
+    "file": {
+        "house": "src/Examples/Resources/config/house/house.json",
+        "pdf": "src/Examples/Resources/config/pdf/pdf.json"
+    }
+}

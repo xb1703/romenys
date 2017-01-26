@@ -1,0 +1,29 @@
+{
+    "name": "romenys/romenys",
+    "type": "project",
+    "version": "0.0.2",
+    "authors": [
+        {
+            "name": "Khalid Sookia",
+            "email": "khalidsookia@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "src/",
+            "Romenys\\app\\": "app/"
+        }
+    },
+    "require": {
+        "symfony/var-dumper": "^3.1",
+        "iknsa/helper-bundle": "^0.0.1",
+        "romenys/helpers": "^0.0.1",
+        "romenys/router": "^0.0.2",
+        "romenys/http": "^0.0.1",
+        "romenys/framework": "^0.0.1",
+        "romenys/logger": "^0.0.1",
+        "twig/twig": "^1.28",
+        "romenys/serializer": "^0.0.1",
+        "phpunit/phpunit": "^4.8"
+    }
+}

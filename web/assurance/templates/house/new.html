@@ -1,0 +1,32 @@
+<form name="house-form" id="form" ng-submit="submit(house)" enctype="multipart/form-data" method="POST">
+    <div class="form-group">
+        <label for="color">color</label>
+        <input type="text" name="color" id="color" ng-model="house.color">
+    </div>
+    <div class="form-group">
+        <label for="car-brand">Car Brand</label>
+        <input type="text" name="[examples_entity_car][brand]" id="car-brand" ng-model="house.examples_entity_car.brand">
+    </div>
+    <div class="form-group">
+        <label for="name">name</label>
+        <input type="text" name="[examples_entity_user][name]" id="name" ng-model="house.examples_entity_user.name">
+    </div>
+    <div class="form-group">
+        <label for="email">email</label>
+        <input type="text" name="[examples_entity_user][email]" id="email" ng-model="house.examples_entity_user.email">
+    </div>
+    <div class="form-group">
+        <label for="avatar">Avatar</label>
+        <input type="file" name="[examples_entity_user][teest]" ngf-select id="test" ng-model="house.test">
+        <input type="file" name="[examples_entity_user][avatar]" ngf-select id="avatar" ng-model="house.examples_entity_user.avatar">
+        <input type="file" name="[examples_entity_user][profile]" ngf-select id="profile" ng-model="house.examples_entity_user.profile">
+        <input type="file" name="[examples_entity_car][car]" ngf-select id="car" ng-model="house.examples_entity_car.car">
+        <!--<ANY ng-if="house.examples_entity_user.avatar">Image thumbnail: <img ngf-thumbnail="house.examples_entity_user.avatar"></ANY>-->
+    </div>
+
+    <input type="submit" class="btn btn-primary">
+</form>
+
+<pre>
+    {{ house }}
+</pre>

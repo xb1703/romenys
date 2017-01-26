@@ -1,0 +1,23 @@
+{
+  "name": "romenys",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.php",
+  "dependencies": {
+    "karma-firefox-launcher": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romenys/romenys.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/romenys/romenys/issues"
+  },
+  "homepage": "https://github.com/romenys/romenys#readme"
+}

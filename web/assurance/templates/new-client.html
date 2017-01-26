@@ -1,0 +1,19 @@
+<div id="container">
+<h1>Ajouter un nouveau client</h1>
+<form name="form" id="form" ng-submit="submit(client)" method="POST">
+    <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" name="nom" id="nom" ng-model="client.nom">
+    </div>
+    <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <input type="text" name="prenom" id="prenom" ng-model="client.prenom">
+    </div>
+    <div class="form-group">
+        <label for="email">email</label>
+        <input type="text" name="email" id="email" ng-model="client.email">
+    </div>
+   
+    <input type="submit" class="btn btn-primary">
+</form>
+</div>

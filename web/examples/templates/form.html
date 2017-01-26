@@ -1,0 +1,26 @@
+<form name="form" id="form" ng-submit="submit(user)" enctype="multipart/form-data" method="POST">
+    <div class="form-group">
+        <label for="name">name</label>
+        <input type="text" name="name" id="name" ng-model="user.name">
+    </div>
+    <div class="form-group">
+        <label for="email">email</label>
+        <input type="text" name="email" id="email" ng-model="user.email">
+    </div>
+
+    <div class="form-group">
+        <label for="avatar">Avatar</label>
+        <input type="file" id="avatar" ngf-select name="avatar" ng-model="user.avatar">
+        <input type="file" id="one" ngf-select name="one" ng-model="user.one">
+        <input type="file" id="two" ngf-select name="two" ng-model="user.two">
+    </div>
+
+    <!--<div class="button" ngf-select ng-model="file" ngf-multiple="true">Select</div>-->
+
+    Image thumbnail: <img ngf-thumbnail="file || ''">
+    <input type="submit" class="btn btn-primary">
+</form>
+
+<pre>
+    {{ user }}
+</pre>

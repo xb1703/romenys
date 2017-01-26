@@ -1,0 +1,22 @@
+{
+  "name": "iknsa-ng-flashes",
+  "homepage": "https://github.com/iknsa-corp/iknsa-ng-flashes",
+  "version": "0.0.1",
+  "authors": [
+    "Khalid Sookia <khalidsookia@gmail.com>"
+  ],
+  "description": "An angular module for dealing with flash messages",
+  "main": "app.js",
+  "keywords": [
+    "angular",
+    "module",
+    "flash",
+    "message",
+    "bag"
+  ],
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "angular-route": "^1.5.9"
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "name": "romenys/logger",
+    "description": "A standalone PHP library for logging data",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Khalid Sookia",
+            "email": "khalidsookia@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": { "Romenys\\Logger\\": "" },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "minimum-stability": "dev"
+}

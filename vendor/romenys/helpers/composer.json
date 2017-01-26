@@ -1,0 +1,22 @@
+{
+    "name": "romenys/helpers",
+    "description": "PHP helpers",
+    "type": "library",
+    "require": {
+        "php": ">=5.4",
+        "iknsa/helper-bundle": ">=0.0.1"
+    },
+    "authors": [
+        {
+            "name": "Khalid Sookia",
+            "email": "khalidsookia@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Romenys\\Helpers\\": "" },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "minimum-stability": "dev"
+}

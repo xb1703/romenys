@@ -1,0 +1,11 @@
+{
+  "name": "cardif-bddf-modif-administratives",
+  "homepage": "https://github.com/iknsa-corp/cardif-modification-administratives-bddf-cardif",
+  "authors": [
+    "Khalid Sookia <khalidsookia@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true
+}

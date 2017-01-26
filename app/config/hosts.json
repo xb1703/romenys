@@ -1,0 +1,13 @@
+{
+    "PROD": {},
+
+    "REC": {},
+
+    "INT": {},
+
+    "DEV": {
+      "0": "romenys.dev",
+      "1": "romenys.int",
+      "2": "localhost"
+    }
+}

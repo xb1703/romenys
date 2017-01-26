@@ -54,6 +54,28 @@ class ExamplesController extends Controller
         ]);
     }
 
+    public function deleteClientAction(Request $request)
+    {
+        $params = $request->getGet();
+        $id = $params["id"];
+
+        $db = new DB();
+        $db = $db->connect();
+
+        $client = $db->query("SELECT * FROM `client` WHERE id = " . $id)->fetch($db::FETCH_ASSOC);
+
+        $client = new Client($client);
+
+        return new JsonResponse([
+            "client" => [
+                "id" => $client->getId(),
+                "nom" => $client->getNom(),
+                "prenom" => $client->getPrenom(),
+                "email" => $client->getEmail()
+            ]
+        ]);
+    }
+
     public function updateClientAction(Request $request)
     {
         $params = $request->getGet();

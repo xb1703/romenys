@@ -176,6 +176,28 @@ app.controller('ClientListController', ['$scope', '$http', function ($scope, $ht
         });
 }]);
 
+app.controller('ClientController', ['$scope', '$http', function ($scope, $http) {
+    console.log('ClientController');
+
+    $scope.client = {};
+
+    $scope.submit = function(client) {
+        console.log(client.nom);
+
+        if (client.nom !== "" && client.prenom !== "" && client.email !== "") {
+            console.log('if');
+            $http.post('/app.php?route=client_new', client)
+                .then(function (response) {
+                    console.log(response);
+                }, function (response) {
+                    console.log('Error status: ' + response.status);
+                });
+        }
+    };
+
+}]);
+
+
 app.controller('ClientUpdateController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
     
     console.log('ClientUpdateController');
@@ -200,8 +222,6 @@ app.controller('ClientUpdateController', ['$scope', '$http', '$routeParams', fun
         };
 
 }]);
-
-
 app.controller('FormController', ['$scope', '$http', 'Upload', function ($scope, $http, Upload) {
     console.log('FormController');
 
@@ -229,24 +249,28 @@ app.controller('FormController', ['$scope', '$http', 'Upload', function ($scope,
     };
 }]);
 
-app.controller('ClientController', ['$scope', '$http', function ($scope, $http) {
-    console.log('ClientController');
 
-    $scope.client = {};
+app.controller('ClientDeleteController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+    
+    console.log('ClientDeleteController');
+    console.log($routeParams);
 
-    $scope.submit = function(client) {
-        console.log(client.nom);
+    $http.get('/app.php?route=client_delete&id=' + $routeParams.id)
+        .then(function (response) {
+            $scope.client = response.data.client;
+            console.log($scope.client.nom);
+        }, function (response) {
+            console.log(response.status);
+        });
 
-        if (client.nom !== "" && client.prenom !== "" && client.email !== "") {
-            console.log('if');
-            $http.post('/app.php?route=client_new', client)
+        $scope.submit = function (client) {
+            console.log(client);
+            $http.post('/app.php?route=client_delete&id=' + $routeParams.id, client)
                 .then(function (response) {
                     console.log(response);
                 }, function (response) {
                     console.log('Error status: ' + response.status);
                 });
-        }
-    };
+        };
 
 }]);
-

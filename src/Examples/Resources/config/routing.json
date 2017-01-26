@@ -35,6 +35,12 @@
             "path": "/client/update/:id",
             "controller": "Examples\\Controller\\Examples",
             "action": "updateClient"
+        }
+        ,
+        "client_delete": {
+            "path": "/client/delete/:id",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "deleteClient"
         },
         "user_show": {
             "path": "/user/:id",

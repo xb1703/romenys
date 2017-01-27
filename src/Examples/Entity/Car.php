@@ -18,7 +18,7 @@ class Car extends Model
 
     private $pictures = [];
 
-    private $user;
+    private $client;
 
     /**
      * @return integer
@@ -88,9 +88,9 @@ class Car extends Model
     /**
      * @return User
      */
-    public function getUser()
+    public function getClient()
     {
-        return $this->user;
+        return $this->client;
     }
 
     /**
@@ -98,9 +98,9 @@ class Car extends Model
      *
      * @return Car
      */
-    public function setUser(User $user)
+    public function setClient(Client $client)
     {
-        $this->user = $user;
+        $this->client = $client;
 
         return $this;
     }

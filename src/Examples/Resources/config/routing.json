@@ -15,11 +15,6 @@
             "controller": "Examples\\Controller\\Examples",
             "action": "form"
         },
-        "user_list": {
-            "path": "/users",
-            "controller": "Examples\\Controller\\Examples",
-            "action": "list"
-        },
         "user_new": {
             "path": "/user/new",
             "controller": "Examples\\Controller\\Examples",
@@ -41,6 +36,16 @@
             "path": "/client/delete/:id",
             "controller": "Examples\\Controller\\Examples",
             "action": "deleteClient"
+        },
+        "client_cars": {
+            "path": "/client/cars/:id",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "ClientCars"
+        },
+        "client_assurance": {
+            "path": "/client/assurance/:id",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "ClientAssurances"
         },
         "user_show": {
             "path": "/user/:id",

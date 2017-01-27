@@ -26,6 +26,14 @@ app.config(function($routeProvider) {
             templateUrl: 'web/assurance/templates/supp-client.html',
             controller: 'ClientDeleteController'
         })
+        .when('/client/cars/:id', {
+            templateUrl: 'web/assurance/templates/client-cars.html',
+            controller: 'ClientCarsController'
+        })
+        .when('/client/assurance/:id', {
+            templateUrl: 'web/assurance/templates/client-assurances.html',
+            controller: 'ClientAssuranceController'
+        })
         .when('/users', {
             templateUrl: 'web/examples/templates/users.html',
             controller: 'UserListController'

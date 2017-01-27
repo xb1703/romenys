@@ -10,6 +10,8 @@ namespace Examples\Controller;
 
 use Examples\Entity\User;
 use Examples\Entity\Client;
+use Examples\Entity\Car;
+use Examples\Entity\Assurance;
 use Romenys\Framework\Components\DB\DB;
 use Romenys\Framework\Components\UrlGenerator;
 use Romenys\Framework\Controller\Controller;
@@ -28,6 +30,48 @@ class ExamplesController extends Controller
         //print_r($clients);
         return new JsonResponse(["clients" => $clients]);
     }
+
+    public function ClientCarsAction(Request $request)
+    {
+        $params = $request->getGet();
+        $id = $params["id"];
+
+        $db = new DB();
+        $db = $db->connect();
+        $cars = array();
+        $query = $db->query("SELECT * FROM `car` WHERE `user`=".$id);
+        $cars = $query->fetchAll($db::FETCH_ASSOC);
+
+        /*while($row = $query->fetch())
+        {
+            if($row['pictures'] !="")
+                $row['pictures'] = base64_encode($row['pictures']);
+            //$car = new Car($row);
+            array_push($cars, $row);
+        }*/
+        //print_r($cars);
+
+        
+        //print_r($cars);
+        return new JsonResponse(["cars" => $cars]);
+        //return json_encode($cars);
+    }
+
+    public function ClientAssurancesAction(Request $request)
+    {
+        $params = $request->getGet();
+        $id = $params["id"];
+
+        $db = new DB();
+        $db = $db->connect();
+        $assurances = array();
+        //echo "SELECT a.id, a.nom, a.client, a.car, car.brand as nom_voiture FROM `assurance` a, `car`c WHERE a.car = c.id AND a.client=".$id;
+        $query = $db->query("SELECT a.id, a.nom, a.client, a.car, c.brand as nom_voiture, u.nom as nom_client FROM `assurance` a, `car`c, client u WHERE u.id = a.client AND a.car = c.id AND a.client=".$id);
+        $assurances = $query->fetchAll($db::FETCH_ASSOC);
+
+        return new JsonResponse(["assurances" => $assurances]);
+    }
+
 
     public function newClientAction(Request $request)
     {
@@ -62,9 +106,21 @@ class ExamplesController extends Controller
         $db = new DB();
         $db = $db->connect();
 
-        $client = $db->query("SELECT * FROM `client` WHERE id = " . $id)->fetch($db::FETCH_ASSOC);
+        if(!empty($request->getPost()))
+        {
+            $postParams = $request->getPost();
 
+            $client = new Client($request->getPost());
+
+            $query = $db->prepare("DELETE FROM `client` WHERE id=:id");
+
+            $query->bindValue(":id", $id);
+            $query->execute();
+        }
+
+        $client = $db->query("SELECT * FROM `client` WHERE id = " . $id)->fetch($db::FETCH_ASSOC);
         $client = new Client($client);
+
 
         return new JsonResponse([
             "client" => [
@@ -91,7 +147,7 @@ class ExamplesController extends Controller
         {
             $postParams = $request->getPost();
 
-            $client = new Client($request->getPost());
+            $client = new Client($postParams);
 
             $query = $db->prepare("UPDATE `client` SET `nom`=:nom, `prenom`=:prenom,  `email`=:email WHERE id=:id");
 

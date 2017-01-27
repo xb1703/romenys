@@ -25,6 +25,173 @@ app.controller('DefaultController', ['$http', function ($http) {
 }]);
 
 
+app.controller('ClientListController', ['$scope', '$http', function ($scope, $http) {
+    
+
+    console.log('ClientListController');
+
+    $scope.clients = {};
+
+    $http.get('/app.php?route=default')
+        .then(function (response) {
+            //console.log(response.data.clients[0].email);
+            $scope.clients = response.data.clients;
+        }, function (response) {
+            console.log(response.status);
+        });
+}]);
+
+app.controller('ClientController', ['$scope', '$http', function ($scope, $http) {
+    console.log('ClientController');
+
+    $scope.client = {};
+
+    $scope.submit = function(client) {
+        console.log(client.nom);
+
+        if (client.nom !== "" && client.prenom !== "" && client.email !== "") {
+            console.log('if');
+            $http.post('/app.php?route=client_new', client)
+                .then(function (response) {
+                    console.log(response);
+                    alert("Client ajouté avec succès !");
+                        location.href="/";
+
+                }, function (response) {
+                    console.log('Error status: ' + response.status);
+                });
+        }
+    };
+
+}]);
+
+
+app.controller('ClientUpdateController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+    
+    console.log('ClientUpdateController');
+    console.log($routeParams);
+
+    $http.get('/app.php?route=client_update&id=' + $routeParams.id)
+        .then(function (response) {
+            $scope.client = response.data.client;
+            console.log($scope.client.nom);
+        }, function (response) {
+            console.log(response.status);
+        });
+
+        $scope.submit = function (client) {
+            console.log(client);
+            $http.post('/app.php?route=client_update&id=' + $routeParams.id, client)
+                .then(function (response) {
+                    console.log(response);
+                    if(response) {
+                        alert("Client modifié avec succès !");
+                        location.href="/";
+                    }
+                }, function (response) {
+                    console.log('Error status: ' + response.status);
+                });
+        };
+
+}]);
+
+app.controller('ClientDeleteController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+    
+    console.log('ClientDeleteController');
+    console.log($routeParams);
+
+    $http.get('/app.php?route=client_delete&id=' + $routeParams.id)
+        .then(function (response) {
+            $scope.client = response.data.client;
+            console.log($scope.client.nom);
+        }, function (response) {
+            console.log(response.status);
+        });
+
+        $scope.submit = function (client) {
+            console.log(client);
+            $http.post('/app.php?route=client_delete&id=' + $routeParams.id, client)
+                .then(function (response) {
+                    console.log(response);
+                    if(response)
+                        alert("Client supprimé avec succès !");
+                        location.href="/";
+                }, function (response) {
+                    console.log('Error status: ' + response.status);
+                });
+        };
+
+}]);
+
+app.controller('ClientCarsController', ['$scope', '$http','$routeParams', function ($scope, $http, $routeParams) {  
+    console.log('ClientCarsController');
+    console.log($routeParams);
+    $scope.cars = {};
+
+    $http.get('/app.php?route=client_cars&id=' + $routeParams.id)
+        .then(function (response) {
+            console.log(response.data);
+            $scope.cars = response.data.cars;
+            //console.log(cars);
+        }, function (response) {
+            console.log(response.status);
+        });
+
+}]);
+
+app.controller('ClientAssuranceController', ['$scope', '$http','$routeParams', function ($scope, $http, $routeParams) {  
+    console.log('ClientAssuranceController');
+    console.log($routeParams);
+    $scope.assurances = {};
+    $scope.client = {};
+
+    $http.get('/app.php?route=client_assurance&id=' + $routeParams.id)
+        .then(function (response) {
+            console.log(response.data);
+            $scope.assurances = response.data.assurances;
+            //console.log(cars);
+        }, function (response) {
+            console.log(response.status);
+        });
+
+    $http.get('/app.php?route=client_update&id=' + $routeParams.id)
+        .then(function (response) {
+            console.log(response.data);
+            $scope.client = response.data.client;
+            //console.log(cars);
+        }, function (response) {
+            console.log(response.status);
+        });
+
+}]);
+
+/*app.controller('FormController', ['$scope', '$http', 'Upload', function ($scope, $http, Upload) {
+    console.log('FormController');
+
+    $scope.user = {
+        name: 'test',
+        email: 'test'
+    };
+
+    // upload on file select or drop
+    $scope.submit = function (user) {
+        Upload.upload({
+            url: '/app.php?route=form',
+            data: {file: user.file, user: user}
+        })
+        .then(function (response) {
+            console.log(response);
+            console.log('Success ' + response.config.data.user.avatar + 'uploaded. Response: ' + response.data);
+        }, function (response) {
+            console.log('Error status: ' + response.status);
+        }, function (evt) {
+            console.log(evt);
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.user.avatar);
+        });
+    };
+}]);
+
 app.controller('PdfNewController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
     $scope.pdf = {};
 
@@ -159,118 +326,4 @@ app.controller('UserListController', ['$scope', '$http', function ($scope, $http
             console.log(response.status);
         });
 }]);
-
-app.controller('ClientListController', ['$scope', '$http', function ($scope, $http) {
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-
-    console.log('ClientListController');
-
-    $scope.clients = {};
-
-    $http.get('/app.php?route=default')
-        .then(function (response) {
-            //console.log(response.data.clients[0].email);
-            $scope.clients = response.data.clients;
-        }, function (response) {
-            console.log(response.status);
-        });
-}]);
-
-app.controller('ClientController', ['$scope', '$http', function ($scope, $http) {
-    console.log('ClientController');
-
-    $scope.client = {};
-
-    $scope.submit = function(client) {
-        console.log(client.nom);
-
-        if (client.nom !== "" && client.prenom !== "" && client.email !== "") {
-            console.log('if');
-            $http.post('/app.php?route=client_new', client)
-                .then(function (response) {
-                    console.log(response);
-                }, function (response) {
-                    console.log('Error status: ' + response.status);
-                });
-        }
-    };
-
-}]);
-
-
-app.controller('ClientUpdateController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-    
-    console.log('ClientUpdateController');
-    console.log($routeParams);
-
-    $http.get('/app.php?route=client_update&id=' + $routeParams.id)
-        .then(function (response) {
-            $scope.client = response.data.client;
-            console.log($scope.client.nom);
-        }, function (response) {
-            console.log(response.status);
-        });
-
-        $scope.submit = function (client) {
-            console.log(client);
-            $http.post('/app.php?route=client_update&id=' + $routeParams.id, client)
-                .then(function (response) {
-                    console.log(response);
-                }, function (response) {
-                    console.log('Error status: ' + response.status);
-                });
-        };
-
-}]);
-app.controller('FormController', ['$scope', '$http', 'Upload', function ($scope, $http, Upload) {
-    console.log('FormController');
-
-    $scope.user = {
-        name: 'test',
-        email: 'test'
-    };
-
-    // upload on file select or drop
-    $scope.submit = function (user) {
-        Upload.upload({
-            url: '/app.php?route=form',
-            data: {file: user.file, user: user}
-        })
-        .then(function (response) {
-            console.log(response);
-            console.log('Success ' + response.config.data.user.avatar + 'uploaded. Response: ' + response.data);
-        }, function (response) {
-            console.log('Error status: ' + response.status);
-        }, function (evt) {
-            console.log(evt);
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.user.avatar);
-        });
-    };
-}]);
-
-
-app.controller('ClientDeleteController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-    
-    console.log('ClientDeleteController');
-    console.log($routeParams);
-
-    $http.get('/app.php?route=client_delete&id=' + $routeParams.id)
-        .then(function (response) {
-            $scope.client = response.data.client;
-            console.log($scope.client.nom);
-        }, function (response) {
-            console.log(response.status);
-        });
-
-        $scope.submit = function (client) {
-            console.log(client);
-            $http.post('/app.php?route=client_delete&id=' + $routeParams.id, client)
-                .then(function (response) {
-                    console.log(response);
-                }, function (response) {
-                    console.log('Error status: ' + response.status);
-                });
-        };
-
-}]);
+*/

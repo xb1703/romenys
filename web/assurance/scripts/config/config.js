@@ -34,21 +34,9 @@ app.config(function($routeProvider) {
             templateUrl: 'web/assurance/templates/client-assurances.html',
             controller: 'ClientAssuranceController'
         })
-        .when('/users', {
-            templateUrl: 'web/examples/templates/users.html',
-            controller: 'UserListController'
-        })
-        .when('/user/:id', {
-            templateUrl: 'web/examples/templates/user-show.html',
-            controller: 'UserShowController'
-        })
-        .when('/house/new', {
-            templateUrl: 'web/examples/templates/house/new.html',
-            controller: 'HouseNewController'
-        })
-        .when('/house/:id', {
-            templateUrl: 'web/examples/templates/house/show.html',
-            controller: 'HouseShowController'
+        .when('/assurance/new/:id', {
+            templateUrl: 'web/assurance/templates/new-assurance.html',
+            controller: 'ClientAssuranceNewController'
         })
         .when('/pdf/:id', {
             templateUrl: 'web/examples/templates/pdf/new.html',

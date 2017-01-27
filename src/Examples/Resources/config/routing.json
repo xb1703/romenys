@@ -15,11 +15,6 @@
             "controller": "Examples\\Controller\\Examples",
             "action": "form"
         },
-        "user_new": {
-            "path": "/user/new",
-            "controller": "Examples\\Controller\\Examples",
-            "action": "new"
-        },
 	   "client_new": {
             "path": "/client/new",
             "controller": "Examples\\Controller\\Examples",
@@ -42,10 +37,20 @@
             "controller": "Examples\\Controller\\Examples",
             "action": "ClientCars"
         },
-        "client_assurance": {
+        "client_assurance_auto": {
             "path": "/client/assurance/:id",
             "controller": "Examples\\Controller\\Examples",
             "action": "ClientAssurances"
+        },
+        "client_assurance_autres": {
+            "path": "/client/assurance/:id",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "ClientAssurances2"
+        },
+        "client_assurance_new": {
+            "path": "/assurance/new/:id",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "ClientAssurancesNew"
         },
         "user_show": {
             "path": "/user/:id",

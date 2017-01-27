@@ -143,16 +143,42 @@ app.controller('ClientAssuranceController', ['$scope', '$http','$routeParams', f
     console.log('ClientAssuranceController');
     console.log($routeParams);
     $scope.assurances = {};
+    $scope.assurances2 = {};
     $scope.client = {};
 
-    $http.get('/app.php?route=client_assurance&id=' + $routeParams.id)
+    $http.get('/app.php?route=client_assurance_auto&id=' + $routeParams.id)
         .then(function (response) {
-            console.log(response.data);
+            console.log(response.data.assurances);
             $scope.assurances = response.data.assurances;
             //console.log(cars);
         }, function (response) {
             console.log(response.status);
         });
+
+    $http.get('/app.php?route=client_assurance_autres&id=' + $routeParams.id)
+        .then(function (response) {
+            console.log(response.data.assurances2);
+            $scope.assurances2 = response.data.assurances2;
+            //console.log(cars);
+        }, function (response) {
+            console.log(response.status);
+        });
+
+    $http.get('/app.php?route=client_update&id=' + $routeParams.id)
+        .then(function (response) {
+            console.log(response.data);
+            $scope.client = response.data.client;
+            //console.log(cars);
+        }, function (response) {
+            console.log(response.status);
+        });
+
+}]);
+
+app.controller('ClientAssuranceNewController', ['$scope', '$http','$routeParams', function ($scope, $http, $routeParams) {  
+    console.log('ClientAssuranceNewController');
+    console.log($routeParams);
+    $scope.client = {};
 
     $http.get('/app.php?route=client_update&id=' + $routeParams.id)
         .then(function (response) {

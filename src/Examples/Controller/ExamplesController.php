@@ -8,7 +8,7 @@
 
 namespace Examples\Controller;
 
-use Examples\Entity\User;
+//use Examples\Entity\User;
 use Examples\Entity\Client;
 use Examples\Entity\Car;
 use Examples\Entity\Assurance;
@@ -27,7 +27,7 @@ class ExamplesController extends Controller
 
         $query = $db->query("SELECT * FROM `client`");
         $clients = $query->fetchAll($db::FETCH_ASSOC);
-        //print_r($clients);
+        
         return new JsonResponse(["clients" => $clients]);
     }
 
@@ -64,13 +64,32 @@ class ExamplesController extends Controller
 
         $db = new DB();
         $db = $db->connect();
-        $assurances = array();
-        //echo "SELECT a.id, a.nom, a.client, a.car, car.brand as nom_voiture FROM `assurance` a, `car`c WHERE a.car = c.id AND a.client=".$id;
-        $query = $db->query("SELECT a.id, a.nom, a.client, a.car, c.brand as nom_voiture, u.nom as nom_client FROM `assurance` a, `car`c, client u WHERE u.id = a.client AND a.car = c.id AND a.client=".$id);
+        
+        $query = $db->query("select a.id, a.nom, a.client, a.assurtype, c.brand as nom_voiture from assurance a, car c, car_assurance ca where a.assurtype='auto' AND a.client = c.user AND ca.car_id = c.id AND ca.assurance_id = a.id AND a.client=".$id);
         $assurances = $query->fetchAll($db::FETCH_ASSOC);
+
+        //print_r($assurances);
 
         return new JsonResponse(["assurances" => $assurances]);
     }
+
+    public function ClientAssurances2Action(Request $request)
+    {
+        $params = $request->getGet();
+        $id = $params["id"];
+
+        $db = new DB();
+        $db = $db->connect();
+        
+        $query = $db->query("select a.id, a.nom, a.client, a.assurtype from assurance a where a.assurtype!='auto' AND a.client=".$id);
+        $assurances = $query->fetchAll($db::FETCH_ASSOC);
+
+        //print_r($assurances);
+
+        return new JsonResponse(["assurances2" => $assurances]);
+    }
+
+    public function ClientAssurancesNewAction(Request $request){}
 
 
     public function newClientAction(Request $request)

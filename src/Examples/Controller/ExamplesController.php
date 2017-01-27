@@ -40,21 +40,38 @@ class ExamplesController extends Controller
         $db = $db->connect();
         $cars = array();
         $query = $db->query("SELECT * FROM `car` WHERE `user`=".$id);
-        $cars = $query->fetchAll($db::FETCH_ASSOC);
+        //$cars = $query->fetchAll($db::FETCH_ASSOC);
+        //$isCarInsured = false;
 
-        /*while($row = $query->fetch())
+        while($row = $query->fetch())
         {
-            if($row['pictures'] !="")
-                $row['pictures'] = base64_encode($row['pictures']);
-            //$car = new Car($row);
-            array_push($cars, $row);
-        }*/
+            $car['assure']= ($this->isCarInsuredAction($row['id'])) ? 1 : 0;
+            $car['id'] = $row['id'];
+            $car['brand'] = $row['brand'];
+            $car['pictures'] = $row['pictures'];
+            $car['user'] = $row['user'];
+            array_push($cars, $car);
+        }
         //print_r($cars);
 
         
         //print_r($cars);
         return new JsonResponse(["cars" => $cars]);
         //return json_encode($cars);
+    }
+
+    public function isCarInsuredAction($id)
+    {
+
+        $db = new DB();
+        $db = $db->connect();
+        $cars = array();
+        $query = $db->query("SELECT * FROM `car_assurance` WHERE `car_id`=".$id);
+        $cars = $query->fetchAll($db::FETCH_ASSOC);
+        $nb = count($cars);
+
+        return $nb;
+
     }
 
     public function ClientAssurancesAction(Request $request)

@@ -180,6 +180,7 @@ app.controller('ClientAssuranceNewController', ['$scope', '$http','$routeParams'
     console.log($routeParams);
     $scope.client = {};
     $scope.cars = {};
+    $scope.assurtypes = ['auto','dc','vie'];
 
     $http.get('/app.php?route=client_update&id=' + $routeParams.id)
         .then(function (response) {

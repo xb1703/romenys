@@ -57,6 +57,11 @@
             "controller": "Examples\\Controller\\Examples",
             "action": "ClientCars"
         },
+        "car_insured": {
+            "path": "/assurance/new/:id",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "isCarInsured"
+        },
         "user_show": {
             "path": "/user/:id",
             "controller": "Examples\\Controller\\Examples",

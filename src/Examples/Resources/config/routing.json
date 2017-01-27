@@ -52,6 +52,11 @@
             "controller": "Examples\\Controller\\Examples",
             "action": "ClientAssurancesNew"
         },
+        "client_cars": {
+            "path": "/assurance/new/:id",
+            "controller": "Examples\\Controller\\Examples",
+            "action": "ClientCars"
+        },
         "user_show": {
             "path": "/user/:id",
             "controller": "Examples\\Controller\\Examples",

@@ -89,6 +89,7 @@ class ExamplesController extends Controller
         return new JsonResponse(["assurances2" => $assurances]);
     }
 
+
     public function ClientAssurancesNewAction(Request $request){}
 
 

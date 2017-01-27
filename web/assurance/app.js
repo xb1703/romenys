@@ -179,11 +179,21 @@ app.controller('ClientAssuranceNewController', ['$scope', '$http','$routeParams'
     console.log('ClientAssuranceNewController');
     console.log($routeParams);
     $scope.client = {};
+    $scope.cars = {};
 
     $http.get('/app.php?route=client_update&id=' + $routeParams.id)
         .then(function (response) {
             console.log(response.data);
             $scope.client = response.data.client;
+            //console.log(cars);
+        }, function (response) {
+            console.log(response.status);
+        });
+
+    $http.get('/app.php?route=client_cars&id=' + $routeParams.id)
+        .then(function (response) {
+            console.log(response.data);
+            $scope.cars = response.data.cars;
             //console.log(cars);
         }, function (response) {
             console.log(response.status);
